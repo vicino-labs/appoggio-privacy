@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Appoggio 개인정보처리방침</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --ink: #202b33;
+    --ink-soft: #46545e;
+    --slate: #6b7680;
+    --accent: #0c447c;
+    --accent-soft: #e7eef5;
+    --line: #e1d9c9;
+    --tagbg: #efe9da;
+    --font-display: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+    --font-body: 'Public Sans', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10181f; --surface: #172029; --ink: #ece8dd; --ink-soft: #c7cdd3;
+      --slate: #8b96a0; --accent: #8fbbea; --accent-soft: #1d3348; --line: #2a3540; --tagbg: #202b33;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10181f; --surface: #172029; --ink: #ece8dd; --ink-soft: #c7cdd3;
+    --slate: #8b96a0; --accent: #8fbbea; --accent-soft: #1d3348; --line: #2a3540; --tagbg: #202b33;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1040px; margin: 0 auto; padding: 0 24px 96px; }
+
+  .langbar {
+    position: sticky; top: 0; z-index: 10; display: flex; gap: 4px; padding: 14px 24px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); margin: 0 -24px 40px;
+  }
+  .langbar button {
+    font-family: var(--font-mono); font-size: .74rem; letter-spacing: .03em; padding: 6px 13px;
+    border-radius: 999px; border: 1px solid transparent; background: none; color: var(--slate); cursor: pointer;
+  }
+  .langbar button:hover { color: var(--ink); }
+  .langbar button.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); font-weight: 600; }
+
+  .masthead { padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 44px; }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 600; letter-spacing: .02em; margin-bottom: 22px; text-decoration: none; }
+  .brand svg { display: block; }
+  .brand span { font-family: var(--font-display); font-size: 1.05rem; }
+  h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1.2; margin: 0 0 18px; text-wrap: balance; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag {
+    font-family: var(--font-mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase;
+    background: var(--tagbg); color: var(--ink-soft); padding: 5px 11px; border-radius: 999px;
+    display: inline-flex; gap: 7px; align-items: center; white-space: nowrap;
+  }
+  .tag b { color: var(--accent); font-weight: 600; }
+
+  .layout { display: grid; grid-template-columns: 220px minmax(0, 680px); gap: 56px; align-items: start; }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; order: 2; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  }
+
+  .toc { position: sticky; top: 64px; display: flex; flex-direction: column; gap: 1px; }
+  .toc-label { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--slate); margin-bottom: 10px; }
+  .toc a {
+    font-family: var(--font-mono); font-size: .76rem; color: var(--ink-soft); text-decoration: none;
+    padding: 7px 10px; border-radius: 7px; line-height: 1.45; transition: background .12s ease, color .12s ease;
+  }
+  .toc a:hover, .toc a:focus-visible { background: var(--accent-soft); color: var(--accent); }
+
+  .lede { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.75; color: var(--ink); max-width: 62ch; margin: 0 0 44px; }
+
+  article section { padding-top: 30px; margin-top: 30px; border-top: 1px solid var(--line); scroll-margin-top: 72px; }
+  article section:first-of-type { padding-top: 0; margin-top: 0; border-top: none; }
+  article h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.24rem; color: var(--accent); text-wrap: balance; margin: 0 0 14px; }
+  article p { font-size: .96rem; line-height: 1.8; color: var(--ink-soft); max-width: 64ch; margin: 0 0 14px; }
+  article ol, article ul { padding-left: 1.3em; display: flex; flex-direction: column; gap: 9px; margin: 0 0 14px; max-width: 62ch; }
+  article li { font-size: .96rem; line-height: 1.7; color: var(--ink-soft); }
+  article strong { color: var(--ink); font-weight: 600; }
+  article a.ext { color: var(--accent); }
+  .summary-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .summary-box li::marker { color: var(--accent); }
+
+  .id-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px;
+    display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; margin-bottom: 8px;
+  }
+  .id-card dt { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--slate); }
+  .id-card dd { margin: 0; color: var(--ink); }
+  .id-card a { color: var(--accent); text-decoration: none; }
+  .id-card a:hover { text-decoration: underline; }
+
+  .contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .contact-card .role { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--slate); }
+  .contact-card .name { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); }
+  .contact-card a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .contact-card a:hover { text-decoration: underline; }
+
+  footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: .82rem; color: var(--slate); margin: 0; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="langbar" role="tablist" aria-label="Language">
+  <button data-lang="ko" class="active" type="button">한국어</button>
+  <button data-lang="en" type="button">English</button>
+  <button data-lang="de" type="button">Deutsch</button>
+  <button data-lang="it" type="button">Italiano</button>
+</div>
+
+<!-- ================= KOREAN ================= -->
+<div class="page doc" data-lang="ko">
+  <div class="masthead">
+    <a class="brand" href="./"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h1.6l1.2-5 1.6 10 1.6-14 1.6 14 1.6-10 1.2 5H18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Appoggio</span></a>
+    <h1>개인정보처리방침</h1>
+    <div class="meta">
+      <span class="tag">시행일 <b>2026.09.13</b></span>
+      <span class="tag">버전 <b>2.0</b></span>
+      <span class="tag">운영자 <b>Vicino Labs</b></span>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="toc">
+      <div class="toc-label">Contents</div>
+      <a href="#ko-1">1. 처리자 정보</a>
+      <a href="#ko-2">2. 핵심 요약</a>
+      <a href="#ko-3">3. 수집 정보(로컬)</a>
+      <a href="#ko-4">4. 광고(AdMob)</a>
+      <a href="#ko-5">5. 인앱 결제</a>
+      <a href="#ko-6">6. 미수집 정보</a>
+      <a href="#ko-7">7. 알림 권한</a>
+      <a href="#ko-8">8. 제3자 제공</a>
+      <a href="#ko-9">9. 보유·파기</a>
+      <a href="#ko-10">10. 아동 보호</a>
+      <a href="#ko-11">11. 정보주체 권리</a>
+      <a href="#ko-12">12. 방침 변경</a>
+      <a href="#ko-13">13. 문의처</a>
+    </nav>
+    <article>
+      <p class="lede">Vicino Labs가 만든 호흡 훈련 앱 Appoggio는 여러분의 정보를 다루는 방식을 되도록 정확하게 알려드리려 합니다. 앱의 훈련 데이터는 기기 밖으로 나가지 않습니다. 현재 버전에는 광고가 없지만, 향후 무료 버전에 광고가 추가될 수 있어 그 경우를 미리 설명해둡니다.</p>
+
+      <section id="ko-1"><h2>1. 처리자(운영자) 정보</h2>
+        <div class="id-card">
+          <dt>상호</dt><dd>Vicino Labs (개인사업자, Einzelunternehmen)</dd>
+          <dt>대표자</dt><dd>Jeong-Hwan Lee</dd>
+          <dt>주소</dt><dd>Ruhrallee 41, 44139 Dortmund, Germany</dd>
+          <dt>이메일</dt><dd><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></dd>
+        </div>
+        <p>Vicino Labs는 EU 일반정보보호규정(GDPR)상 이 앱의 개인정보 처리에 관한 "컨트롤러(controller)"입니다.</p>
+      </section>
+
+      <section id="ko-2"><h2>2. 핵심 요약</h2>
+        <div class="summary-box"><ul>
+          <li>회원가입·로그인 기능이 없습니다.</li>
+          <li>훈련 설정, 알림 시각, 완료 기록은 <strong>이용자의 기기에만</strong> 저장됩니다 (애초에 서버가 없습니다).</li>
+          <li><strong>현재 버전에는 광고가 없습니다.</strong> 향후 무료 버전에 <strong>Google AdMob</strong> 광고가 추가될 수 있으며, 추가되는 경우 광고 식별자 등 일부 정보가 Google에 전달될 수 있습니다 (자세한 내용은 4조).</li>
+          <li>광고가 추가되면, 인앱 결제로 <strong>"광고 제거"</strong>를 구매해 광고 관련 정보 처리를 중단할 수 있습니다. 결제는 Apple/Google이 처리하며 회사는 결제정보를 보유하지 않습니다.</li>
+          <li>카메라·마이크에 접근하지 않습니다.</li>
+          <li>EEA·영국·스위스 이용자에게는 동의관리도구(CMP)를 통해 광고 관련 동의를 먼저 요청합니다.</li>
+        </ul></div>
+      </section>
+
+      <section id="ko-3"><h2>3. 수집하는 정보 (기기 로컬 저장)</h2>
+        <p>앱은 다음 정보를 <strong>이용자의 기기 내부 저장소</strong>에만 보관합니다.</p>
+        <ol>
+          <li>훈련 설정값 — 라운드 수, 타이머 스타일, 다크모드 여부, 훈련 중 피드백 방식(소리·진동)</li>
+          <li>언어 설정</li>
+          <li>리마인더(알림) 설정 — 켜짐/꺼짐 여부와 시각</li>
+          <li>훈련 완료 기록 — 훈련을 완료한 날짜. 정확한 시각, 소요시간은 저장하지 않습니다.</li>
+        </ol>
+        <p>이 정보는 기기 내부에만 저장되며, 회사 서버로 전송되거나 회사가 조회할 방법이 없습니다.</p>
+      </section>
+
+      <section id="ko-4"><h2>4. 광고(Google AdMob) 관련 정보 처리</h2>
+        <p><strong>현재 앱에는 광고가 포함되어 있지 않습니다.</strong> 이 조항은 향후 무료 버전에 광고가 추가될 경우를 대비해 미리 설명해두는 내용입니다. 광고가 추가되면, 무료 버전(광고 제거를 구매하지 않은 경우)에서는 Google AdMob을 통해 광고를 표시하게 되며, 이 과정에서 Google 및 Google의 광고 파트너가 아래 정보를 수집·처리할 수 있습니다.</p>
+        <ul>
+          <li>광고 식별자(iOS: IDFA, Android: 광고 ID) — iOS는 이용자가 앱 추적 투명성(ATT) 요청에서 허용한 경우에만 제공됩니다.</li>
+          <li>IP 주소 기반의 대략적 위치정보</li>
+          <li>기기·운영체제 정보, 광고 노출·클릭 등 상호작용 데이터</li>
+        </ul>
+        <p>이 정보는 광고 게재, 빈도 조절, 성과 측정, (동의한 경우) 관심사 기반 맞춤광고 제공에 사용됩니다. 회사는 이 정보를 직접 수집·저장하지 않으며, Google이 자체 정책에 따라 독립적으로 처리합니다.</p>
+        <p>EEA·영국·스위스 이용자에게는 앱 실행 시 Google 인증 동의관리플랫폼(UMP)을 통해 동의를 요청하며, 이용자는 언제든 동의를 철회하거나 비맞춤형 광고만 받도록 선택할 수 있습니다.</p>
+        <p>자세한 내용: <a class="ext" href="https://policies.google.com/privacy">Google 개인정보처리방침</a>, <a class="ext" href="https://policies.google.com/technologies/partner-sites">Google이 파트너 사이트/앱 정보를 사용하는 방식</a>. 기기 설정에서도 맞춤형 광고를 제한할 수 있습니다 (iOS: 설정 &gt; 개인정보 보호 및 보안 &gt; 추적 / Android: 설정 &gt; Google &gt; 광고).</p>
+      </section>
+
+      <section id="ko-5"><h2>5. 인앱 결제(광고 제거)</h2>
+        <p><strong>현재 앱에는 유료 결제 기능이 없습니다.</strong> 향후 광고가 추가되면, 이용자는 인앱 결제로 "광고 제거" 기능을 구매해 광고 없이 앱을 이용할 수 있게 될 예정입니다. 그 경우 결제는 전적으로 Apple App Store 또는 Google Play가 처리하며, 회사는 카드번호 등 결제 정보를 전달받거나 저장하지 않습니다. 구매·환불 문의는 결제가 이루어진 스토어의 정책에 따릅니다.</p>
+      </section>
+
+      <section id="ko-6"><h2>6. 수집하지 않는 정보</h2>
+        <p>회사는 이름, 생년월일, 이메일 주소, 전화번호, 정확한 위치정보, 연락처, 사진첩 접근 정보를 직접 수집하지 않으며, 카메라·마이크 데이터도 수집하지 않습니다.</p>
+      </section>
+
+      <section id="ko-7"><h2>7. 기기 알림 권한</h2>
+        <p>앱은 설정한 시각에 훈련을 상기시키는 로컬 알림(리마인더)을 위해 기기의 알림 권한을 요청할 수 있습니다. 이 알림은 이용자의 기기 안에서 예약·발송되며 외부 서버와 통신하지 않습니다. 알림 권한은 기기의 설정에서 언제든 철회할 수 있습니다.</p>
+      </section>
+
+      <section id="ko-8"><h2>8. 제3자 제공 및 위탁</h2>
+        <p>회사는 이용자의 정보를 직접 보유하지 않으므로 제공할 정보 자체가 없습니다. 다만 광고 서비스를 위해 Google(AdMob)이 위 4조와 같이 정보를 처리하며, 이는 무료(광고 포함) 버전 이용 중에만 발생합니다. 그 밖의 목적으로 제3자에게 정보를 제공·위탁하지 않습니다.</p>
+      </section>
+
+      <section id="ko-9"><h2>9. 보유기간 및 파기</h2>
+        <p>기기에 저장된 정보는 기록 화면의 "기록 초기화" 기능 또는 앱 삭제로 언제든 파기할 수 있습니다. 회사는 서버에 정보를 보관하지 않으므로 회사 측에서 삭제해야 할 정보 자체가 없습니다. Google이 처리하는 광고 관련 정보는 Google 자체의 보유기간 정책을 따릅니다.</p>
+      </section>
+
+      <section id="ko-10"><h2>10. 아동의 개인정보 보호</h2>
+        <p>앱은 특정 연령층을 대상으로 하지 않으며 만 14세 미만 아동으로부터 개인정보를 의도적으로 수집하지 않습니다. AdMob 광고는 아동 대상(child-directed) 처리로 설정되어 있지 않습니다.</p>
+      </section>
+
+      <section id="ko-11"><h2>11. 정보주체의 권리 (GDPR)</h2>
+        <p>회사는 독일에 설립된 사업자로서 GDPR상 컨트롤러이며, 이에 따라 이용자는 다음 권리를 가집니다.</p>
+        <ul>
+          <li>열람권·정정권·삭제권·처리제한권·이의제기권·데이터이동권 (GDPR 제15~21조)</li>
+          <li>동의를 철회할 권리 (철회는 그 이전 처리의 적법성에 영향을 미치지 않습니다)</li>
+          <li>감독기관에 이의를 제기할 권리 — 노르트라인베스트팔렌주 정보자유보호관(LDI NRW) 또는 거주지 관할 감독기관</li>
+        </ul>
+        <p>광고와 무관한 대부분의 데이터(훈련기록 등)는 애초에 기기에만 있으므로, 위 권리는 앱의 설정 화면 또는 기기 자체에서 즉시 행사할 수 있습니다.</p>
+      </section>
+
+      <section id="ko-12"><h2>12. 개인정보처리방침의 변경</h2>
+        <p>법령, 정책 또는 앱의 기능 변경에 따라 본 방침이 개정될 수 있습니다. 변경 시 변경사항과 시행일자를 본 페이지에 게시하고, 중요한 변경은 앱 내 공지로 안내합니다.</p>
+      </section>
+
+      <section id="ko-13"><h2>13. 문의처</h2>
+        <p>개인정보 처리에 관한 문의나 요청이 있으시면 아래로 연락해 주세요.</p>
+        <div class="contact-card"><span class="role">Operator</span><span class="name">Vicino Labs</span><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></div>
+      </section>
+    </article>
+  </div>
+  <footer><p>본 방침은 2026년 9월 13일부터 시행됩니다 (버전 2.0).</p><p><a href="./terms/">이용약관 보기 →</a></p></footer>
+</div>
+
+<!-- ================= ENGLISH ================= -->
+<div class="page doc" data-lang="en" hidden>
+  <div class="masthead">
+    <a class="brand" href="./"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h1.6l1.2-5 1.6 10 1.6-14 1.6 14 1.6-10 1.2 5H18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Appoggio</span></a>
+    <h1>Privacy Policy</h1>
+    <div class="meta">
+      <span class="tag">Effective <b>2026-09-13</b></span>
+      <span class="tag">Version <b>2.0</b></span>
+      <span class="tag">Operator <b>Vicino Labs</b></span>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="toc">
+      <div class="toc-label">Contents</div>
+      <a href="#en-1">1. Data controller</a>
+      <a href="#en-2">2. Summary</a>
+      <a href="#en-3">3. Data stored locally</a>
+      <a href="#en-4">4. Advertising (AdMob)</a>
+      <a href="#en-5">5. In-app purchase</a>
+      <a href="#en-6">6. Data we don't collect</a>
+      <a href="#en-7">7. Notification permission</a>
+      <a href="#en-8">8. Third parties</a>
+      <a href="#en-9">9. Retention & deletion</a>
+      <a href="#en-10">10. Children's privacy</a>
+      <a href="#en-11">11. Your rights (GDPR)</a>
+      <a href="#en-12">12. Changes to this policy</a>
+      <a href="#en-13">13. Contact</a>
+    </nav>
+    <article>
+      <p class="lede">Appoggio is a breathing-training app made by Vicino Labs. We'd rather be precise than vague about how your information is handled: your training data never leaves your device. The current version shows no ads, but ads may be added to a free tier later, so we explain that scenario in advance below.</p>
+
+      <section id="en-1"><h2>1. Data controller</h2>
+        <div class="id-card">
+          <dt>Trading name</dt><dd>Vicino Labs (sole proprietorship, Einzelunternehmen)</dd>
+          <dt>Owner</dt><dd>Jeong-Hwan Lee</dd>
+          <dt>Address</dt><dd>Ruhrallee 41, 44139 Dortmund, Germany</dd>
+          <dt>Email</dt><dd><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></dd>
+        </div>
+        <p>Vicino Labs is the "controller" for personal data processed in connection with this app under the EU General Data Protection Regulation (GDPR).</p>
+      </section>
+
+      <section id="en-2"><h2>2. Summary</h2>
+        <div class="summary-box"><ul>
+          <li>No account or sign-in.</li>
+          <li>Training settings, reminder times, and completion history are stored <strong>only on your device</strong> — there is no server to send them to.</li>
+          <li><strong>The current version has no ads.</strong> If a free, ad-supported tier is introduced later, it will use <strong>Google AdMob</strong>, which may share some information (such as an advertising identifier) with Google — see Section 4.</li>
+          <li>If ads are introduced, buying <strong>"Remove ads"</strong> as an in-app purchase will stop all ad-related data processing. Payment is handled entirely by Apple/Google; we never see or store your payment details.</li>
+          <li>We never access your camera or microphone.</li>
+          <li>Users in the EEA, UK, or Switzerland are asked for ad-related consent through a consent management platform (CMP) before anything else happens.</li>
+        </ul></div>
+      </section>
+
+      <section id="en-3"><h2>3. Data stored locally on your device</h2>
+        <p>The app keeps the following only in local storage on your device:</p>
+        <ol>
+          <li>Training settings — round count, timer style, dark mode, in-session feedback (sound/vibration)</li>
+          <li>Language preference</li>
+          <li>Reminder settings — on/off state and time</li>
+          <li>Training completion history — the date a session was completed. We don't store the exact time or session duration.</li>
+        </ol>
+        <p>This information stays on your device; there is no server for it to be sent to, and we have no way to view it.</p>
+      </section>
+
+      <section id="en-4"><h2>4. Advertising (Google AdMob)</h2>
+        <p><strong>The app currently shows no ads.</strong> This section describes how things will work if a free, ad-supported tier is introduced later. Once that happens, the free version (unless you've purchased "Remove ads") will show ads served through Google AdMob, and in the process Google and its advertising partners may collect:</p>
+        <ul>
+          <li>An advertising identifier (IDFA on iOS — only if you allow it via Apple's App Tracking Transparency prompt — or Advertising ID on Android)</li>
+          <li>Approximate location derived from your IP address</li>
+          <li>Device/OS information and ad interaction data (impressions, clicks)</li>
+        </ul>
+        <p>This is used to serve ads, manage frequency, measure performance, and — where you've consented — personalize ads to your interests. We do not collect or store this data ourselves; Google processes it independently under its own policies.</p>
+        <p>Users in the EEA, UK, and Switzerland are shown a consent request via a Google-certified Consent Management Platform (UMP) when the app starts, and can withdraw consent or choose non-personalized ads at any time.</p>
+        <p>Learn more: <a class="ext" href="https://policies.google.com/privacy">Google Privacy Policy</a>, <a class="ext" href="https://policies.google.com/technologies/partner-sites">How Google uses information from partner sites/apps</a>. You can also limit ad personalization in your device settings (iOS: Settings &gt; Privacy &amp; Security &gt; Tracking / Android: Settings &gt; Google &gt; Ads).</p>
+      </section>
+
+      <section id="en-5"><h2>5. In-app purchase (Remove ads)</h2>
+        <p><strong>The app currently has no paid features.</strong> If ads are introduced later, you will be able to buy a "Remove ads" feature as an in-app purchase. Payment would be processed entirely by the Apple App Store or Google Play — we would never receive or store your card details. Purchase and refund questions would be handled under the policy of whichever store processed the payment.</p>
+      </section>
+
+      <section id="en-6"><h2>6. Data we don't collect</h2>
+        <p>We do not directly collect your name, date of birth, email address, phone number, precise location, contacts, or photo library access, and we never access your camera or microphone.</p>
+      </section>
+
+      <section id="en-7"><h2>7. Notification permission</h2>
+        <p>The app may request notification permission to remind you to train at times you choose. These reminders are scheduled and delivered entirely on your device and never involve any server. You can withdraw this permission at any time in your device settings.</p>
+      </section>
+
+      <section id="en-8"><h2>8. Third parties</h2>
+        <p>We don't hold your information ourselves, so there is nothing for us to share. The one exception is Google (AdMob), which processes ad-related data as described in Section 4 — and only while you're using the free, ad-supported version. We do not share or outsource data for any other purpose.</p>
+      </section>
+
+      <section id="en-9"><h2>9. Retention & deletion</h2>
+        <p>You can delete data on your device at any time using "Reset records" on the Records screen, or by deleting the app. We hold nothing on a server, so there's nothing on our end to delete. Ad-related data processed by Google follows Google's own retention policies.</p>
+      </section>
+
+      <section id="en-10"><h2>10. Children's privacy</h2>
+        <p>The app is not directed at any particular age group and does not knowingly collect personal data from children under 14. AdMob ads served in the app are not configured for child-directed treatment.</p>
+      </section>
+
+      <section id="en-11"><h2>11. Your rights (GDPR)</h2>
+        <p>Because Vicino Labs is established in Germany and acts as a controller under the GDPR, you have the following rights:</p>
+        <ul>
+          <li>The right of access, rectification, erasure, restriction of processing, objection, and data portability (GDPR Articles 15–21)</li>
+          <li>The right to withdraw consent at any time (this doesn't affect the lawfulness of processing before the withdrawal)</li>
+          <li>The right to lodge a complaint with a supervisory authority — such as the data protection authority of North Rhine-Westphalia (LDI NRW) or the authority where you live</li>
+        </ul>
+        <p>For most of your data — which never leaves your device — you can already exercise these rights instantly from the app's settings or your device itself.</p>
+      </section>
+
+      <section id="en-12"><h2>12. Changes to this policy</h2>
+        <p>We may update this policy to reflect changes in law, our practices, or the app's features. Any change will be posted here with its effective date, and material changes will also be announced in the app.</p>
+      </section>
+
+      <section id="en-13"><h2>13. Contact</h2>
+        <p>For any question or request about how your data is handled, please reach out.</p>
+        <div class="contact-card"><span class="role">Operator</span><span class="name">Vicino Labs</span><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></div>
+      </section>
+    </article>
+  </div>
+  <footer><p>This policy is effective as of September 13, 2026 (version 2.0).</p><p><a href="./terms/">View Terms of Service →</a></p></footer>
+</div>
+
+<!-- ================= DEUTSCH ================= -->
+<div class="page doc" data-lang="de" hidden>
+  <div class="masthead">
+    <a class="brand" href="./"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h1.6l1.2-5 1.6 10 1.6-14 1.6 14 1.6-10 1.2 5H18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Appoggio</span></a>
+    <h1>Datenschutzerklärung</h1>
+    <div class="meta">
+      <span class="tag">Gültig ab <b>13.09.2026</b></span>
+      <span class="tag">Version <b>2.0</b></span>
+      <span class="tag">Betreiber <b>Vicino Labs</b></span>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="toc">
+      <div class="toc-label">Inhalt</div>
+      <a href="#de-1">§ 1 Verantwortlicher</a>
+      <a href="#de-2">§ 2 Zusammenfassung</a>
+      <a href="#de-3">§ 3 Lokale Daten</a>
+      <a href="#de-4">§ 4 Werbung (AdMob)</a>
+      <a href="#de-5">§ 5 In-App-Kauf</a>
+      <a href="#de-6">§ 6 Nicht erhobene Daten</a>
+      <a href="#de-7">§ 7 Benachrichtigungen</a>
+      <a href="#de-8">§ 8 Dritte</a>
+      <a href="#de-9">§ 9 Speicherdauer</a>
+      <a href="#de-10">§ 10 Kinder</a>
+      <a href="#de-11">§ 11 Ihre Rechte (DSGVO)</a>
+      <a href="#de-12">§ 12 Änderungen</a>
+      <a href="#de-13">§ 13 Kontakt</a>
+    </nav>
+    <article>
+      <p class="lede">Appoggio ist eine Atemtraining-App von Vicino Labs. Wir möchten lieber genau als vage erklären, was mit Ihren Daten geschieht: Ihre Trainingsdaten verlassen nie Ihr Gerät. Die aktuelle Version zeigt keine Werbung, künftig könnte jedoch eine kostenlose, werbefinanzierte Version hinzukommen — diesen Fall erklären wir hier vorab.</p>
+
+      <section id="de-1"><h2>§ 1 Verantwortlicher</h2>
+        <div class="id-card">
+          <dt>Firma</dt><dd>Vicino Labs (Einzelunternehmen)</dd>
+          <dt>Inhaber</dt><dd>Jeong-Hwan Lee</dd>
+          <dt>Anschrift</dt><dd>Ruhrallee 41, 44139 Dortmund, Deutschland</dd>
+          <dt>E-Mail</dt><dd><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></dd>
+        </div>
+        <p>Vicino Labs ist Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) für die im Zusammenhang mit dieser App verarbeiteten personenbezogenen Daten.</p>
+      </section>
+
+      <section id="de-2"><h2>§ 2 Zusammenfassung</h2>
+        <div class="summary-box"><ul>
+          <li>Keine Registrierung, kein Login.</li>
+          <li>Trainingseinstellungen, Erinnerungszeiten und Abschlussverlauf werden <strong>ausschließlich auf Ihrem Gerät</strong> gespeichert — es gibt keinen Server, an den sie gesendet werden könnten.</li>
+          <li><strong>Die aktuelle Version enthält keine Werbung.</strong> Wird künftig eine kostenlose, werbefinanzierte Stufe eingeführt, geschieht dies über <strong>Google AdMob</strong>, wobei bestimmte Daten (z. B. eine Werbekennung) an Google übermittelt werden können — siehe § 4.</li>
+          <li>Wird Werbung eingeführt, endet mit dem In-App-Kauf <strong>"Werbung entfernen"</strong> jede werbebezogene Datenverarbeitung. Die Zahlung würde vollständig von Apple/Google abgewickelt; wir erhalten oder speichern keine Zahlungsdaten.</li>
+          <li>Wir greifen nie auf Kamera oder Mikrofon zu.</li>
+          <li>Nutzer im EWR, in Großbritannien oder der Schweiz werden vor jeder Verarbeitung über eine Einwilligungsplattform (CMP) um Zustimmung zur Werbung gebeten.</li>
+        </ul></div>
+      </section>
+
+      <section id="de-3"><h2>§ 3 Auf Ihrem Gerät gespeicherte Daten</h2>
+        <p>Die App speichert ausschließlich lokal auf Ihrem Gerät:</p>
+        <ol>
+          <li>Trainingseinstellungen — Rundenzahl, Timer-Stil, Dunkelmodus, Feedback während des Trainings (Ton/Vibration)</li>
+          <li>Spracheinstellung</li>
+          <li>Erinnerungseinstellungen — Ein/Aus-Status und Uhrzeit</li>
+          <li>Trainingsverlauf — das Datum abgeschlossener Einheiten. Genaue Uhrzeit und Dauer werden nicht gespeichert.</li>
+        </ol>
+        <p>Diese Daten verbleiben auf Ihrem Gerät; es gibt keinen Server, an den sie übertragen werden, und keine Möglichkeit für uns, sie einzusehen.</p>
+      </section>
+
+      <section id="de-4"><h2>§ 4 Werbung (Google AdMob)</h2>
+        <p><strong>Die App zeigt derzeit keine Werbung.</strong> Dieser Abschnitt beschreibt, wie es funktionieren würde, sollte künftig eine kostenlose, werbefinanzierte Stufe eingeführt werden. In diesem Fall würde die kostenlose Version (sofern "Werbung entfernen" nicht erworben wurde) Werbung über Google AdMob zeigen, wobei Google und dessen Werbepartner Folgendes erheben könnten:</p>
+        <ul>
+          <li>Eine Werbekennung (iOS: IDFA — nur sofern über Apples App-Tracking-Transparenz zugestimmt — bzw. Android: Werbe-ID)</li>
+          <li>Einen ungefähren Standort anhand der IP-Adresse</li>
+          <li>Geräte-/Betriebssysteminformationen sowie Interaktionsdaten (Impressionen, Klicks)</li>
+        </ul>
+        <p>Diese Daten dienen der Auslieferung und Frequenzsteuerung von Anzeigen, der Erfolgsmessung sowie — bei erteilter Einwilligung — der interessenbezogenen Personalisierung. Wir selbst erheben oder speichern diese Daten nicht; Google verarbeitet sie eigenständig nach seinen eigenen Richtlinien.</p>
+        <p>Nutzern im EWR, in Großbritannien und der Schweiz wird beim Start der App über eine von Google zertifizierte Einwilligungsplattform (UMP) eine Einwilligung eingeholt; die Zustimmung kann jederzeit widerrufen oder auf nicht-personalisierte Werbung beschränkt werden.</p>
+        <p>Weitere Informationen: <a class="ext" href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>, <a class="ext" href="https://policies.google.com/technologies/partner-sites">Wie Google Daten von Partner-Websites/-Apps verwendet</a>. Eine Einschränkung der Personalisierung ist auch über die Geräteeinstellungen möglich (iOS: Einstellungen &gt; Datenschutz &amp; Sicherheit &gt; Tracking / Android: Einstellungen &gt; Google &gt; Anzeigen).</p>
+      </section>
+
+      <section id="de-5"><h2>§ 5 In-App-Kauf ("Werbung entfernen")</h2>
+        <p><strong>Die App enthält derzeit keine kostenpflichtigen Funktionen.</strong> Sollte künftig Werbung eingeführt werden, könnte die Funktion "Werbung entfernen" per In-App-Kauf erworben werden. Die Zahlung würde vollständig über den Apple App Store oder Google Play abgewickelt; wir würden keine Zahlungsdaten erhalten oder speichern. Fragen zu Kauf oder Erstattung würden sich nach den Richtlinien des jeweiligen Stores richten.</p>
+      </section>
+
+      <section id="de-6"><h2>§ 6 Nicht erhobene Daten</h2>
+        <p>Wir erheben nicht selbst Ihren Namen, Ihr Geburtsdatum, Ihre E-Mail-Adresse, Telefonnummer, Ihren genauen Standort, Ihre Kontakte oder Zugriffe auf Ihre Fotomediathek, und greifen zu keinem Zeitpunkt auf Kamera oder Mikrofon zu.</p>
+      </section>
+
+      <section id="de-7"><h2>§ 7 Benachrichtigungsberechtigung</h2>
+        <p>Die App kann eine Benachrichtigungsberechtigung anfordern, um Sie an von Ihnen gewählten Zeiten ans Training zu erinnern. Diese Erinnerungen werden vollständig auf Ihrem Gerät geplant und zugestellt, ohne dass ein Server beteiligt ist. Sie können diese Berechtigung jederzeit in den Geräteeinstellungen widerrufen.</p>
+      </section>
+
+      <section id="de-8"><h2>§ 8 Weitergabe an Dritte</h2>
+        <p>Da wir Ihre Daten nicht selbst vorhalten, gibt es grundsätzlich nichts, was wir weitergeben könnten. Die einzige Ausnahme ist Google (AdMob), das werbebezogene Daten wie in § 4 beschrieben verarbeitet — ausschließlich während der Nutzung der kostenlosen, werbefinanzierten Version. Für andere Zwecke geben wir keine Daten an Dritte weiter oder lassen sie verarbeiten.</p>
+      </section>
+
+      <section id="de-9"><h2>§ 9 Speicherdauer und Löschung</h2>
+        <p>Auf dem Gerät gespeicherte Daten können jederzeit über "Aufzeichnungen zurücksetzen" im Bereich Aufzeichnungen oder durch Löschen der App entfernt werden. Da wir keine Daten auf einem Server vorhalten, gibt es auf unserer Seite nichts zu löschen. Von Google verarbeitete werbebezogene Daten unterliegen den eigenen Speicherfristen von Google.</p>
+      </section>
+
+      <section id="de-10"><h2>§ 10 Schutz von Kindern</h2>
+        <p>Die App richtet sich an keine bestimmte Altersgruppe und erhebt nicht wissentlich personenbezogene Daten von Kindern unter 14 Jahren. Die über AdMob ausgespielte Werbung ist nicht für eine an Kinder gerichtete Behandlung konfiguriert.</p>
+      </section>
+
+      <section id="de-11"><h2>§ 11 Ihre Rechte (DSGVO)</h2>
+        <p>Da Vicino Labs in Deutschland niedergelassen ist und als Verantwortlicher im Sinne der DSGVO handelt, haben Sie folgende Rechte:</p>
+        <ul>
+          <li>Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit (Art. 15–21 DSGVO)</li>
+          <li>Recht auf jederzeitigen Widerruf einer erteilten Einwilligung (die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung bleibt unberührt)</li>
+          <li>Recht auf Beschwerde bei einer Aufsichtsbehörde — zuständig ist insbesondere die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW) oder die Aufsichtsbehörde Ihres Wohnsitzes</li>
+        </ul>
+        <p>Da die meisten Ihrer Daten (z. B. der Trainingsverlauf) ohnehin nur auf Ihrem Gerät liegen, können Sie diese Rechte dort und in den App-Einstellungen bereits unmittelbar selbst ausüben.</p>
+      </section>
+
+      <section id="de-12"><h2>§ 12 Änderungen dieser Erklärung</h2>
+        <p>Diese Erklärung kann aufgrund geänderter Rechtslage, Praxis oder Funktionen der App angepasst werden. Änderungen werden mit Datum auf dieser Seite veröffentlicht; wesentliche Änderungen werden zusätzlich in der App angekündigt.</p>
+      </section>
+
+      <section id="de-13"><h2>§ 13 Kontakt</h2>
+        <p>Bei Fragen oder Anliegen zur Datenverarbeitung wenden Sie sich bitte an:</p>
+        <div class="contact-card"><span class="role">Betreiber</span><span class="name">Vicino Labs</span><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></div>
+      </section>
+    </article>
+  </div>
+  <footer><p>Diese Erklärung gilt ab dem 13. September 2026 (Version 2.0).</p><p><a href="./terms/">Zu den Nutzungsbedingungen →</a></p></footer>
+</div>
+
+<!-- ================= ITALIANO ================= -->
+<div class="page doc" data-lang="it" hidden>
+  <div class="masthead">
+    <a class="brand" href="./"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h1.6l1.2-5 1.6 10 1.6-14 1.6 14 1.6-10 1.2 5H18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Appoggio</span></a>
+    <h1>Informativa sulla privacy</h1>
+    <div class="meta">
+      <span class="tag">In vigore dal <b>13.09.2026</b></span>
+      <span class="tag">Versione <b>2.0</b></span>
+      <span class="tag">Titolare <b>Vicino Labs</b></span>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="toc">
+      <div class="toc-label">Indice</div>
+      <a href="#it-1">Art. 1 Titolare</a>
+      <a href="#it-2">Art. 2 In sintesi</a>
+      <a href="#it-3">Art. 3 Dati locali</a>
+      <a href="#it-4">Art. 4 Pubblicità (AdMob)</a>
+      <a href="#it-5">Art. 5 Acquisto in-app</a>
+      <a href="#it-6">Art. 6 Dati non raccolti</a>
+      <a href="#it-7">Art. 7 Notifiche</a>
+      <a href="#it-8">Art. 8 Terze parti</a>
+      <a href="#it-9">Art. 9 Conservazione</a>
+      <a href="#it-10">Art. 10 Minori</a>
+      <a href="#it-11">Art. 11 I tuoi diritti (GDPR)</a>
+      <a href="#it-12">Art. 12 Modifiche</a>
+      <a href="#it-13">Art. 13 Contatti</a>
+    </nav>
+    <article>
+      <p class="lede">Appoggio è un'app per l'allenamento del respiro creata da Vicino Labs. Preferiamo essere precisi piuttosto che vaghi su come trattiamo i tuoi dati: i tuoi dati di allenamento non lasciano mai il dispositivo. La versione attuale non mostra pubblicità, ma in futuro potrebbe essere introdotta una versione gratuita con annunci — spieghiamo qui in anticipo questo scenario.</p>
+
+      <section id="it-1"><h2>Art. 1 (Titolare del trattamento)</h2>
+        <div class="id-card">
+          <dt>Ragione</dt><dd>Vicino Labs (ditta individuale, Einzelunternehmen)</dd>
+          <dt>Titolare</dt><dd>Jeong-Hwan Lee</dd>
+          <dt>Indirizzo</dt><dd>Ruhrallee 41, 44139 Dortmund, Germania</dd>
+          <dt>Email</dt><dd><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></dd>
+        </div>
+        <p>Vicino Labs è il "titolare del trattamento" dei dati personali trattati in relazione a questa app ai sensi del Regolamento generale sulla protezione dei dati (GDPR).</p>
+      </section>
+
+      <section id="it-2"><h2>Art. 2 (In sintesi)</h2>
+        <div class="summary-box"><ul>
+          <li>Nessuna registrazione o accesso.</li>
+          <li>Impostazioni di allenamento, orari dei promemoria e cronologia dei completamenti sono salvati <strong>solo sul tuo dispositivo</strong> — non esiste alcun server a cui inviarli.</li>
+          <li><strong>La versione attuale non contiene pubblicità.</strong> Se in futuro verrà introdotta una versione gratuita con annunci, questa userà <strong>Google AdMob</strong>, che può condividere alcune informazioni (come un identificativo pubblicitario) con Google — vedi Art. 4.</li>
+          <li>Se la pubblicità verrà introdotta, acquistando <strong>"Rimuovi pubblicità"</strong> tramite acquisto in-app si interromperà ogni trattamento di dati legato alla pubblicità. Il pagamento sarà gestito interamente da Apple/Google; non riceviamo né conserviamo i dati di pagamento.</li>
+          <li>Non accediamo mai a fotocamera o microfono.</li>
+          <li>Agli utenti nello SEE, nel Regno Unito o in Svizzera viene richiesto il consenso tramite una piattaforma di gestione del consenso (CMP) prima di qualsiasi trattamento pubblicitario.</li>
+        </ul></div>
+      </section>
+
+      <section id="it-3"><h2>Art. 3 (Dati salvati localmente sul dispositivo)</h2>
+        <p>L'app conserva esclusivamente in memoria locale sul tuo dispositivo:</p>
+        <ol>
+          <li>Impostazioni di allenamento — numero di round, stile del timer, modalità scura, feedback durante l'allenamento (suono/vibrazione)</li>
+          <li>Preferenza di lingua</li>
+          <li>Impostazioni dei promemoria — stato attivo/disattivo e orario</li>
+          <li>Cronologia degli allenamenti completati — la data in cui una sessione è stata completata. Non salviamo l'orario esatto né la durata.</li>
+        </ol>
+        <p>Queste informazioni restano sul tuo dispositivo; non esiste un server a cui vengano inviate, e non abbiamo alcun modo di consultarle.</p>
+      </section>
+
+      <section id="it-4"><h2>Art. 4 (Pubblicità — Google AdMob)</h2>
+        <p><strong>Al momento l'app non mostra alcuna pubblicità.</strong> Questa sezione descrive come funzionerebbe qualora in futuro venisse introdotta una versione gratuita con annunci. In tal caso, nella versione gratuita (salvo acquisto di "Rimuovi pubblicità"), l'app mostrerebbe annunci tramite Google AdMob, e in questo processo Google e i suoi partner pubblicitari potrebbero raccogliere:</p>
+        <ul>
+          <li>Un identificativo pubblicitario (IDFA su iOS — solo se consentito tramite la richiesta App Tracking Transparency di Apple — oppure l'ID pubblicitario su Android)</li>
+          <li>Una posizione approssimativa derivata dall'indirizzo IP</li>
+          <li>Informazioni sul dispositivo/sistema operativo e dati di interazione con gli annunci (visualizzazioni, clic)</li>
+        </ul>
+        <p>Questi dati servono a mostrare gli annunci, gestirne la frequenza, misurarne le prestazioni e, se hai acconsentito, personalizzarli in base ai tuoi interessi. Non raccogliamo né conserviamo noi stessi questi dati: Google li tratta autonomamente secondo le proprie policy.</p>
+        <p>Agli utenti nello SEE, nel Regno Unito e in Svizzera viene mostrata una richiesta di consenso tramite una piattaforma certificata da Google (UMP) all'avvio dell'app; il consenso può essere revocato in qualsiasi momento, oppure è possibile scegliere annunci non personalizzati.</p>
+        <p>Per saperne di più: <a class="ext" href="https://policies.google.com/privacy">Informativa sulla privacy di Google</a>, <a class="ext" href="https://policies.google.com/technologies/partner-sites">Come Google usa le informazioni dei siti/app partner</a>. Puoi anche limitare la personalizzazione dalle impostazioni del dispositivo (iOS: Impostazioni &gt; Privacy e sicurezza &gt; Tracciamento / Android: Impostazioni &gt; Google &gt; Annunci).</p>
+      </section>
+
+      <section id="it-5"><h2>Art. 5 (Acquisto in-app — Rimuovi pubblicità)</h2>
+        <p><strong>Al momento l'app non prevede funzioni a pagamento.</strong> Se in futuro verrà introdotta la pubblicità, sarà possibile acquistare la funzione "Rimuovi pubblicità" come acquisto in-app. Il pagamento sarà gestito interamente dall'App Store di Apple o da Google Play; non riceveremo né conserveremo i dati della tua carta. Le richieste relative ad acquisti o rimborsi seguiranno la policy dello store presso cui è avvenuto il pagamento.</p>
+      </section>
+
+      <section id="it-6"><h2>Art. 6 (Dati che non raccogliamo)</h2>
+        <p>Non raccogliamo direttamente nome, data di nascita, indirizzo email, numero di telefono, posizione precisa, rubrica o accesso alla libreria foto, e non accediamo mai a fotocamera o microfono.</p>
+      </section>
+
+      <section id="it-7"><h2>Art. 7 (Autorizzazione alle notifiche)</h2>
+        <p>L'app può richiedere l'autorizzazione a inviare notifiche per ricordarti di allenarti negli orari che scegli. Questi promemoria vengono programmati e recapitati interamente sul tuo dispositivo, senza coinvolgere alcun server. Puoi revocare questa autorizzazione in qualsiasi momento dalle impostazioni del dispositivo.</p>
+      </section>
+
+      <section id="it-8"><h2>Art. 8 (Comunicazione a terzi)</h2>
+        <p>Non conserviamo i tuoi dati, quindi non abbiamo nulla da comunicare. L'unica eccezione è Google (AdMob), che tratta i dati legati alla pubblicità come descritto all'Art. 4 — solo mentre utilizzi la versione gratuita con pubblicità. Per nessun altro scopo comunichiamo o affidiamo dati a terzi.</p>
+      </section>
+
+      <section id="it-9"><h2>Art. 9 (Conservazione e cancellazione)</h2>
+        <p>I dati salvati sul dispositivo possono essere cancellati in qualsiasi momento con "Reimposta registri" nella schermata Registri, oppure disinstallando l'app. Non conserviamo alcun dato su un server, quindi non abbiamo nulla da cancellare da parte nostra. I dati pubblicitari trattati da Google seguono le policy di conservazione di Google.</p>
+      </section>
+
+      <section id="it-10"><h2>Art. 10 (Tutela dei minori)</h2>
+        <p>L'app non è rivolta a una fascia d'età specifica e non raccoglie consapevolmente dati personali da minori di 14 anni. Gli annunci AdMob mostrati nell'app non sono configurati per un trattamento rivolto ai minori.</p>
+      </section>
+
+      <section id="it-11"><h2>Art. 11 (I tuoi diritti — GDPR)</h2>
+        <p>Poiché Vicino Labs ha sede in Germania e agisce come titolare ai sensi del GDPR, hai i seguenti diritti:</p>
+        <ul>
+          <li>Diritto di accesso, rettifica, cancellazione, limitazione del trattamento, opposizione e portabilità dei dati (artt. 15–21 GDPR)</li>
+          <li>Diritto di revocare il consenso in qualsiasi momento (la revoca non pregiudica la liceità del trattamento precedente)</li>
+          <li>Diritto di presentare reclamo a un'autorità di controllo — in particolare l'autorità per la protezione dei dati del Nord Reno-Vestfalia (LDI NRW) o l'autorità del proprio luogo di residenza</li>
+        </ul>
+        <p>Poiché la maggior parte dei tuoi dati (come la cronologia degli allenamenti) risiede comunque solo sul dispositivo, puoi già esercitare questi diritti immediatamente dalle impostazioni dell'app o dal dispositivo stesso.</p>
+      </section>
+
+      <section id="it-12"><h2>Art. 12 (Modifiche alla presente informativa)</h2>
+        <p>Questa informativa può essere aggiornata in base a modifiche normative, alle nostre pratiche o alle funzionalità dell'app. Ogni modifica sarà pubblicata qui con la relativa data di efficacia; le modifiche rilevanti saranno comunicate anche nell'app.</p>
+      </section>
+
+      <section id="it-13"><h2>Art. 13 (Contatti)</h2>
+        <p>Per qualsiasi domanda o richiesta relativa al trattamento dei tuoi dati, contattaci pure.</p>
+        <div class="contact-card"><span class="role">Titolare</span><span class="name">Vicino Labs</span><a href="mailto:vicinolabs@gmail.com">vicinolabs@gmail.com</a></div>
+      </section>
+    </article>
+  </div>
+  <footer><p>La presente informativa è in vigore dal 13 settembre 2026 (versione 2.0).</p><p><a href="./terms/">Vedi i Termini di servizio →</a></p></footer>
+</div>
+
+<script>
+  (function () {
+    var bar = document.querySelector('.langbar');
+    var docs = document.querySelectorAll('.doc');
+    var supported = ['ko', 'en', 'de', 'it'];
+    function setLang(lang) {
+      docs.forEach(function (d) { d.hidden = d.getAttribute('data-lang') !== lang; });
+      bar.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      try { localStorage.setItem('appoggio-legal-lang', lang); } catch (e) {}
+    }
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-lang]');
+      if (!btn) return;
+      setLang(btn.getAttribute('data-lang'));
+    });
+    var initial = 'ko';
+    try {
+      var hash = (location.hash || '').replace('#', '');
+      var saved = localStorage.getItem('appoggio-legal-lang');
+      var nav = (navigator.language || 'en').slice(0, 2);
+      if (supported.indexOf(hash) !== -1) initial = hash;
+      else if (saved && supported.indexOf(saved) !== -1) initial = saved;
+      else if (supported.indexOf(nav) !== -1) initial = nav;
+    } catch (e) {}
+    if (initial !== 'ko') setLang(initial);
+  })();
+</script>
+
+</body>
+</html>
